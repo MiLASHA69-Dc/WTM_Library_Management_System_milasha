@@ -1,3 +1,13 @@
 from django.db import models
 
 # Create your models here.
+class Author(models.Model):
+    first_name=models.CharField(max_length=100,null=False,blank=False)
+    last_name=models.CharField(max_length=100,null=False,blank=False)
+    dob=models.DateField(null=False,blank=False)
+    year_of_death=models.DateField(null=True,blank=True)
+
+    def __str__(self):
+        self.show_death = self.year_of_death if self.year_of_death else "Alive"
+        return f"-{self.first_name} -{self.last_name} -{self.dob} -{self.show_death}"
+    

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        ul{
+            list-style-type: none;
+            display: flex;
+
+        }
+         
+        #first{
+            margin-left: 15px;
+
+        }
+
+        
+    </style>
+    
+    <title>{{title}}</title>
+
+    
+</head>
+<body>
+    <ul>
+        <li id="first"><a href=" {% url 'create_author' %} ">create author</a></li>
+        <li id="first"><a href="{% url 'display_author' %} ">view author</a></li>
+    </ul>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

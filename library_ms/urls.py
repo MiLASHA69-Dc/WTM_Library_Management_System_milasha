@@ -20,4 +20,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("author/", include("author_app.urls")), #If the browser request starts with author/ send it to the corresponding app urls.py which is here:author_app/urls.py
+    path("book/",include("book_app.urls")),
+    path("genre/",include("genre_app.urls")), 
 ]
