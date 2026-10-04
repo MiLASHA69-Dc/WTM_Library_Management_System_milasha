@@ -30,8 +30,10 @@
 </head>
 <body>
     <ul>
-        <li id="first"><a href=" {% url 'create_author' %} ">create author</a></li>
-        <li id="first"><a href="{% url 'display_author' %} ">view author</a></li>
+        <li id="first"><a href=" {% url 'create_author' %} ">Create Author</a></li>
+        <li id="first"><a href="{% url 'display_author' %} ">View Author</a></li>
+        <li id="first"><a href="{% url 'all_genres' %} ">View Genre</a></li>
+    
     </ul>
     {% block content %}
 

@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+<h2>Update Genres</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{update_form.as_p}}
+       
+        <button type="submit">Submit</button>
+        <button type="reset"><a href="{% url 'all_genres' %}">Cancel</a></button>
+    </form>
+
+
+
+{% endblock %}
+    

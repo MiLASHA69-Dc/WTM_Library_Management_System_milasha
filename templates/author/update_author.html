@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+<h2>Update Authors</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{update_form.as_p}}
+       
+        <button type="submit">Submit</button>
+        <button type="reset"><a href="{% url 'display_author' %}">Cancel</a></button>
+    </form>
+
+
+
+{% endblock %}
+    

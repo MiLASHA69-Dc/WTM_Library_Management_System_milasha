@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Author
-from .forms import CreateAuthorForm
+from .forms import CreateAuthorForm,UpdateAuthorForm
 
 
 
@@ -27,3 +27,25 @@ def create_author(request):
             "author_form":create_author_form
         }    
     return render(request,"author/create_author.html",context)
+
+def update_author(request,author_id):
+     get_author = Author.objects.get(id=author_id)
+     if request.method == "POST":
+          update_author_form = UpdateAuthorForm(request.POST,instance=get_author)
+          if update_author_form.is_valid():
+               update_author_form.save()
+               return redirect("display_author")
+     else:
+        update_author_form = UpdateAuthorForm(instance=get_author)
+
+     context = {
+     "update_form":update_author_form
+}
+     return render (request,"author/update_author.html",context)
+      
+
+def delete_author(request,author_id):
+     get_author = Author.objects.get(id=author_id)
+     get_author.delete()
+     return redirect ("display_author")
+

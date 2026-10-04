@@ -1,0 +1,33 @@
+{% extends "base/base.html"%}
+
+{% block content %}
+
+<h2>Genre List</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ create_genre.as_p }}
+    <button type="submit">Add Genre</button>
+    <button type="reset">Reset</button>
+    <p></p>
+</form>
+
+<table>
+    <tr>
+        <th>Serial Number</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th colspan="2">Options</th>
+    </tr>
+
+    {% for genre in display_genres%}
+    <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{genre.title}}</td>
+    <td>{{genre.category}}</td>
+    <td><a href="{% url 'update_genre' genre.id %}">Update</a></td>
+    <td><a href="{% url 'delete_genre' genre.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

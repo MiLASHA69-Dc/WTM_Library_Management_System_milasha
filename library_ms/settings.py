@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'author_app',
     'book_app',
     'genre_app',
+    #import and exporting files
+    'import_export',
 ]
 
 MIDDLEWARE = [
