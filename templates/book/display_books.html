@@ -1,0 +1,62 @@
+{% extends "base/base.html"%}
+
+{% block content %}
+<h2>Add Bookss</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+     
+{# instead of {{ create_form.as_p}} #}
+
+     {{create_form.title.label_tag}}
+     {{create_form.title}}
+     {{create_form.title.errors}}
+
+     <p>{{create_form.isbn.label_tag}}
+     {{create_form.isbn}}</p>
+
+     {{create_form.author.label_tag}}
+     {{create_form.author}}
+
+     <p>{{create_form.genre.label_tag}}
+     {{create_form.genre}}</p>
+
+     {{create_form.published_date.label_tag}}
+     {{create_form.published_date}}
+     
+
+
+    <button type="submit">submit</button>
+</form>
+
+<h2>Book List</h2>
+
+<table>
+    <tr>
+        <th>Serial Number</th>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Published Date</th>
+        <th>Age of Book</th>
+        <th colspan="2">Actions</th>
+    </tr>
+    {% for book in all_books %}
+
+    
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.author}}</td>
+        <td>{% for genre in book.genre.all %}
+        {{genre.title}} {% if not forloop.last%},{% endif %}
+        {% endfor %}</td>
+        <td>{{book.published_date}}</td>
+        <td>{{book.published_date|timesince}}</td>
+        <td><a href="{% url 'books:update_books' book.id %}">Edit</a></td>
+        <td><a href="{% url 'books:delete_book' book.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

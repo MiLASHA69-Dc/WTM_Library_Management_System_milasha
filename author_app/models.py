@@ -9,5 +9,5 @@ class Author(models.Model):
 
     def __str__(self):
         self.show_death = self.year_of_death if self.year_of_death else "Alive"
-        return f"-{self.first_name} -{self.last_name} -{self.dob} -{self.show_death}"
+        return f"-{self.first_name} -{self.last_name}"
     

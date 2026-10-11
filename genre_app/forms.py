@@ -5,3 +5,5 @@ class CreateGenreForm(forms.ModelForm):
     class Meta:
         model = Genre
         fields = ['title', 'category']
+
+
