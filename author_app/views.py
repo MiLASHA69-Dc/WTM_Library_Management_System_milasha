@@ -2,17 +2,21 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Author
 from .forms import CreateAuthorForm,UpdateAuthorForm
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
-
-
+@login_required
 def author_view(request): # The actual response creates here and returns it to the browser
     title = "Author Application"
     #return HttpResponse("<h2>Hello! Welcome to the Author app in my Library Management System web app</h2>")
 
     display_all_authors = Author.objects.all().order_by("-id") # This will display all the authors in the database in descending order of their id
-    return render (request,"author/display_author.html",{"all_authors":display_all_authors})
+    paginate = Paginator(display_all_authors,10)
+    page_number = request.GET.get('page')
+    page_obj = paginate.get_page(page_number)
+    return render (request,"author/display_author.html",{"all_authors":page_obj})
 
-
+@login_required
 def create_author(request):
     if request.method == "POST":
         create_author_form = CreateAuthorForm(request.POST)
@@ -28,6 +32,7 @@ def create_author(request):
         }    
     return render(request,"author/create_author.html",context)
 
+@login_required
 def update_author(request,author_id):
      get_author = Author.objects.get(id=author_id)
      if request.method == "POST":
@@ -44,6 +49,7 @@ def update_author(request,author_id):
      return render (request,"author/update_author.html",context)
       
 
+@login_required
 def delete_author(request,author_id):
      get_author = Author.objects.get(id=author_id)
      get_author.delete()

@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import Book
 from .forms import CreateBookForm, UpdateBookForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
-
+@login_required
 def view_book(request):
     all_books = Book.objects.all()
     if request.method == 'POST':
@@ -20,11 +22,13 @@ def view_book(request):
     }
     return render(request,'book/display_books.html',context)
 
+@login_required
 def delete_book(request,book_id):
     get_book = Book.objects.get(id=book_id)
     get_book.delete()
     return redirect('books:view_book')
 
+@login_required
 def update_book(request,update_id):
     get_book = Book.objects.get(id=update_id)
     if request.method == 'POST':

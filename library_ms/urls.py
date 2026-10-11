@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("",include("home.urls")),
+    path("accounts/",include("accounts.urls")),
     path("author/", include("author_app.urls")), #If the browser request starts with author/ send it to the corresponding app urls.py which is here:author_app/urls.py
     path("book/",include("book_app.urls")),
     path("genre/",include("genre_app.urls")), 
-]
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT) + debug_toolbar_urls() 

@@ -23,10 +23,7 @@
 
         
     </style>
-    
-    <title>{{title}}</title>
-
-    
+    <title>{{title}}</title>  
 </head>
 <body>
     <ul>
@@ -34,6 +31,7 @@
         <li id="first"><a href="{% url 'display_author' %} ">View Author</a></li>
         <li id="first"><a href="{% url 'all_genres' %} ">View Genre</a></li>
         <li id="first"><a href="{% url 'books:view_book' %}">View Book</a></li>
+        <li id="first"><a href="{% url 'accounts:logout' %}">Log out</a></li>
     
     </ul>
     {% block content %}

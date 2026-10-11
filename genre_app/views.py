@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import Genre
 from .forms import CreateGenreForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def view_genre(request):
     all_genre=Genre.objects.all()
     if request.method == "POST":
@@ -22,6 +24,7 @@ def view_genre(request):
 
     return render(request,"genre/display_genre.html",context)
 
+@login_required
 def update_genre(request,update_id):
     get_genre=Genre.objects.get(id=update_id)
     if request.method == "POST":
@@ -38,6 +41,7 @@ def update_genre(request,update_id):
 
     return render(request,"genre/update_genre.html",context)
 
+@login_required
 def delete_genere(request,delete_id):
     get_genere=Genre.objects.get(id=delete_id)
     get_genere.delete()

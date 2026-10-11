@@ -12,10 +12,8 @@
             <th colspan="2">Options</th>
         </tr>
         {% for author in all_authors %}
-     
-    
         <tr>
-            <td>{{forloop.counter}}</td>
+            <td>{{all_authors.start_index|add:forloop.counter0}}</td>
             <td>{{author.first_name}}</td>
             <td>{{author.last_name}}</td>
             <td>{{author.dob}}</td>
@@ -30,6 +28,29 @@
         </tr>
         {% endfor %}
     </table>
+
+    <div>
+        Showing {{all_authors.start_index}} to {{all_authors.end_index}} of {{all_authors.paginator.count}} total records.
+    </div>
+     <div>    
+        {% for range in all_authors.paginator.page_range %}
+            {# {{range}} #}
+            <a href="?page={{range}}">{{range}}</a>
+        {% endfor %}
+    </div>
+    <div>
+        {% if all_authors.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{all_authors.previous_page_number}}">Previous</a>
+        {% endif %}
+    </div>    
+        {# {{all_authors.paginator.page_range}} #}
+   <div>    
+        {% if all_authors.has_next %}
+        <a href="?page={{all_authors.next_page_number}}">Next</a>
+        <a href="?page={{all_authors.paginator.num_pages}}">Last</a>
+        {% endif %}
+    </div>
 
 
 {% endblock %}
