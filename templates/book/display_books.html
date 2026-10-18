@@ -39,6 +39,7 @@
         <th>Genre</th>
         <th>Published Date</th>
         <th>Age of Book</th>
+        <th>Book Status</th>
         <th colspan="2">Actions</th>
     </tr>
     {% for book in all_books %}
@@ -54,6 +55,7 @@
         {% endfor %}</td>
         <td>{{book.published_date}}</td>
         <td>{{book.published_date|timesince}}</td>
+        <td>{{book.get_status_display}}</td>
         <td><a href="{% url 'books:update_books' book.id %}">Edit</a></td>
         <td><a href="{% url 'books:delete_book' book.id %}">Delete</a></td>
     </tr>

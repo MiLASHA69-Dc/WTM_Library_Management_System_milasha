@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title> 
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         table,th,td{
             border: 1px solid black;
             border-collapse: collapse;
         }
-
+        
         ul{
             list-style-type: none;
             display: flex;
@@ -26,16 +30,22 @@
     <title>{{title}}</title>  
 </head>
 <body>
+    {% include "base/navbar.html" %}
     <ul>
+        {% if request.user.is_authenticated %}
         <li id="first"><a href=" {% url 'create_author' %} ">Create Author</a></li>
         <li id="first"><a href="{% url 'display_author' %} ">View Author</a></li>
         <li id="first"><a href="{% url 'all_genres' %} ">View Genre</a></li>
         <li id="first"><a href="{% url 'books:view_book' %}">View Book</a></li>
+        <li id="first">Welcome <a href="{% url 'accounts:profile' %}">{{request.user.username}}</a>!</li>
         <li id="first"><a href="{% url 'accounts:logout' %}">Log out</a></li>
+        {% else %}
+        <li id="first"><a href="{% url 'accounts:register' %}">Register</a></li>
+        <li id="first"><a href="{% url 'accounts:login' %}">Login</a></li>
+        {% endif %}
     
     </ul>
     {% block content %}
-
     {% endblock %}
 </body>
 </html>

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home:index' %}">Library MS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_author' %}">Create Author</a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'books:book_request' %}">Make a Book Request</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'display_author' %}">View Author</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'all_genres' %}">View Genre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'books:view_book' %}">View Book</a>
+          </li>
+        {% endif %}
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:profile' %}">Welcome {{ request.user.username }}!</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:logout' %}">Log out</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h2>BOOK REQUEST</h2>
+<form action=""  method="post">
+    {% csrf_token%}
+    {{request_form.as_p}}  {# request_form is the key of the context dictionary from views.py #}
+    <button class="btn btn-primary" type="submit">Create Request</button>
+</form>
+<h2>My Book Requests</h2>
+<table>
+    <tr>
+        <th>Serial Number</th>
+        <th>Book Title</th>
+        <th>Request Date</th>
+        <th>Return Date</th>
+        <th>No. of Days Borrowed</th>
+    </tr>
+    {% for request in request_table %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{request.book}}</td>
+            <td>{{request.date_of_request}}</td>
+            <td>{{request.date_of_return}}</td>
+            <td>{{request.date_of_request|timesince:request.date_of_return}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

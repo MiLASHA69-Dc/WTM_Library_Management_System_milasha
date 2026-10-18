@@ -2,8 +2,22 @@ from django.shortcuts import render,redirect
 from .forms import RegistrationForm,LoginForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from .models import UserProfile
 
 # Create your views here.
+
+def view_userprofile(request):
+     User = get_user_model()
+     a_user=request.user 
+     get_user = User.objects.get(id=a_user.id) # get_user = User.objects.get(id=a_user.id) or get_user = get_user_model().objects.get(id=a_user.id)
+
+     context={
+         'user':get_user
+    }
+
+     return render(request,"auth/profile.html",context)
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -31,7 +45,8 @@ def registration_view(request):
     if request.method == 'POST':
         registration_form = RegistrationForm(request.POST)
         if registration_form.is_valid():
-            registration_form.save()
+            create = registration_form.save() # Built-in UserCreationForm එකෙන් Save වීම
+            UserProfile.objects.create(user=create) # Automate Profile
             return redirect("accounts:login")
 
     else:

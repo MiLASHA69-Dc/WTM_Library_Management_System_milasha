@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h2>My Profile</h2>
+      {# user is the context given in views.py in def view_userprofile #}
+    <p>Username: {{user.username}}</p>
+    <p>Full Name: {{user.first_name}} {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Gender: {{user.userprofile.gender }} </p>
+    <p>Country: {{user.userprofile.country }} </p>
+    <p>City: {{user.userprofile.city }} </p>
+   
+
+{% endblock %}
